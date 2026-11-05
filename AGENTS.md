@@ -1,417 +1,300 @@
-# AGENTS.md
+# AGENTS.md — Personal Art Gallery
 
-# Personal Art Gallery --- AI Development Guidelines
+本文件是 Personal Art Gallery 專案的主要 AI 開發規範。所有 AI Coding Agent 在修改程式碼前，必須先閱讀並遵守本文件。
 
-## 1. Project Overview
+---
 
-### 1.1 Project Name
+## 1. 專案目標
 
-Personal Art Gallery
+建立一個以個人繪畫作品為核心的作品展示網站，讓訪客能瀏覽手繪與電繪作品、依年份及作品類型篩選，並進入單件作品的詳細介紹頁。
 
-### 1.2 Project Purpose
+### 核心功能
 
-建立一個個人繪畫作品展示網站，用於展示、分類及管理個人繪畫創作。
+- 首頁與 Featured Works 精選作品區。
+- Traditional Art（手繪）與 Digital Art（電繪）分類入口。
+- Gallery 完整作品集與篩選、排序功能。
+- 共用的 Artwork Detail 作品詳細介紹頁。
+- Lightbox 圖片檢視功能。
+- About Me 個人介紹頁。
+- 桌面、平板及手機響應式版面。
+- 支援 GitHub Pages 靜態網站部署。
 
-網站以作品展示為核心，提供清楚的瀏覽體驗，讓訪客可以依照作品類型、創作技法及年份瀏覽作品，並查看個別作品的詳細資訊。
+### 專案設計原則
 
-### 1.3 Core Features
+1. 作品圖片與作品本身是頁面視覺主角。
+2. 保持日系、溫暖、文藝、簡潔的作品集風格。
+3. 作品資料與 HTML、CSS、JavaScript 分離，以 JSON 管理。
+4. 新增作品時，原則上只需新增圖片及 JSON 資料，不應重寫展示程式。
+5. 優先延續現有架構，採取最小幅度修改。
 
-網站應具備以下功能：
+---
 
-1.  個人藝術作品首頁。
-2.  手繪（Traditional Art）與電繪（Digital Art）分類。
-3.  作品展示 Gallery。
-4.  作品分類與篩選功能。
-5.  作品詳細介紹頁面。
-6.  圖片放大與全螢幕瀏覽。
-7.  支援桌面、平板及手機裝置。
-8.  個人介紹 About Me。
-9.  GitHub Pages 靜態網站部署。
+## 2. 技術規範
 
-### 1.4 Project Principles
+### 使用技術
 
--   以作品本身作為網站的主要視覺焦點。
--   保持簡潔、清新、具有日系藝術感的設計。
--   使用模組化程式架構，方便未來維護。
--   作品資料與前端程式分離。
--   新增作品時，不應需要修改 Gallery 的主要程式碼。
--   優先使用原生 HTML、CSS 與 JavaScript。
+- HTML5
+- CSS3
+- 原生 JavaScript（Vanilla JavaScript）
+- JSON
+- Git / GitHub
+- GitHub Pages
 
-------------------------------------------------------------------------
+### 限制
 
-## 2. Technology Stack
+- 不使用 React、Vue、Angular 等前端框架。
+- 不以 Node.js 作為網站執行環境。
+- 不任意加入大型套件、建置工具或外部 API。
+- 優先使用瀏覽器原生 API。
+- 如確實需要新增第三方依賴，先說明原因、用途及替代方案。
 
-### 2.1 Required Technologies
+---
 
-  Technology                Purpose
-  ------------------------- ----------------------
-  HTML5                     網頁結構
-  CSS3                      網頁樣式與響應式排版
-  JavaScript (Vanilla JS)   網站互動與功能
-  JSON                      作品資料管理
-  GitHub                    原始碼版本管理
-  GitHub Pages              靜態網站部署
+## 3. 視覺與 UI 規範
 
-### 2.2 Development Restrictions
+### 設計方向
 
--   使用 HTML、CSS、原生 JavaScript。
--   不使用 React、Vue、Angular 等前端框架。
--   不使用 Node.js 作為網站執行環境。
--   不引入不必要的大型第三方套件。
--   優先使用原生 JavaScript API。
--   若需要第三方函式庫，必須先確認其必要性。
--   保持程式碼簡單、清楚且容易維護。
+**Japanese Pastel Art Gallery**：日系、柔和粉彩、溫暖文藝、簡約留白。
 
-### 2.3 Browser Compatibility
+### 色彩方向
 
-網站應支援：
+全站優先沿用既有 CSS Variables，不要在各頁面重複硬編碼顏色。整體以奶油白、淺粉、淺綠、米色及深灰棕為主。
 
--   Google Chrome
--   Microsoft Edge
--   Safari
--   Firefox
+參考色票（若專案已有不同設定，以現有設定為準）：
 
-------------------------------------------------------------------------
-
-## 3. Design Guidelines
-
-### 3.1 Design Direction
-
-網站採用：
-
-**Japanese Pastel Art Gallery**
-
-設計定位：
-
--   Japanese Style（日系風格）
--   Soft Pastel Colors（柔和粉彩）
--   Minimalist Layout（簡約排版）
--   Artistic Portfolio（個人藝術作品集）
--   Warm and Cozy Atmosphere（溫暖、清新的視覺氛圍）
-
-整體視覺應具有日系插畫作品集的感覺，而不是傳統美術館或商業電商網站。
-
-### 3.2 Color Palette
-
-全站應統一使用 CSS Variables 管理顏色。
-
-``` css
+```css
 :root {
-  /* Background */
   --color-background: #F8F5EF;
   --color-surface: #FFFDF9;
-
-  /* Pastel Pink */
   --color-pink: #F6DDE3;
   --color-pink-light: #FBECEF;
-
-  /* Pastel Green */
   --color-green: #DCE9D9;
   --color-green-dark: #A8B99F;
-
-  /* Neutral Colors */
   --color-beige: #EBDCCB;
   --color-text: #514944;
   --color-text-muted: #8B8178;
   --color-border: #E8E1D8;
-
-  /* UI */
   --color-white: #FFFFFF;
-  --color-shadow: rgba(81, 73, 68, 0.08);
 }
 ```
 
-### 3.3 Color Usage
+### UI 原則
 
-  Color      Usage
-  ---------- --------------------------
-  奶油白     網站主要背景
-  淺粉色     手繪分類、裝飾、按鈕
-  淺綠色     電繪分類、裝飾、互動元素
-  米色       卡片背景及輔助區塊
-  深灰棕色   標題與主要文字
-  淺灰色     分隔線與次要資訊
+- 保持足夠留白、清楚的資訊層級及一致的間距。
+- 作品展示優先使用 Grid/Flexbox。
+- 圓角、陰影及 Hover 效果保持輕柔，不使用過度動畫。
+- 不使用高飽和色或過多漸層。
+- 不得為新增功能擅自重新設計整站。
+- 新增 UI 必須沿用既有字體、色彩、按鈕、卡片及導覽列風格。
 
-設計原則：
+---
 
--   不使用高飽和度顏色。
--   不使用過多漸層。
--   保持足夠留白。
--   避免過度裝飾。
--   粉色與綠色應保持柔和。
--   作品圖片應比 UI 裝飾更醒目。
+## 4. 頁面與導覽行為
 
-### 3.4 Typography
+### 4.1 Home（index.html）
 
-字體設計應符合日系清新風格。
+首頁包含導覽列、Hero、Traditional Art / Digital Art 分類入口、Featured Works、About 預覽及 Footer。
 
-建議：
+Featured Works 中每件作品均應可連結至該作品的詳細介紹頁，連結格式應與全站共用的作品詳細頁一致：
 
--   中文：Noto Sans TC。
--   英文：使用簡潔的 Sans-serif 字體。
--   標題可以搭配較有特色的襯線字體。
--   Logo 可使用手寫感字體，但必須維持可讀性。
+```text
+artwork.html?id=<作品唯一 ID>
+```
 
-字體應統一管理，避免不同頁面出現不一致的字體風格。
+### 4.2 Gallery（gallery.html）
 
-### 3.5 Layout Guidelines
+Gallery 顯示完整作品清單，作品卡片點擊後必須進入對應作品的詳細介紹頁，不應只開啟圖片 Lightbox。
 
--   使用簡潔的區塊式排版。
--   保持適當的區塊間距。
--   作品展示優先使用 Grid Layout。
--   圖片比例應保持一致或依作品特性設定。
--   卡片圓角採用柔和設計。
--   Hover 效果應自然、輕微。
--   不使用過度複雜的動畫。
+篩選器依頁面情境顯示：
 
-------------------------------------------------------------------------
+- Gallery 全部作品：作品類型、創作年份、排序。
+- 手繪分類頁／手繪篩選狀態：作品類型固定為手繪，只顯示年份及排序。
+- 電繪分類頁／電繪篩選狀態：作品類型固定為電繪，只顯示年份及排序。
 
-## 4. Website Structure
+### 4.3 Artwork Detail（artwork.html）
 
-### 4.1 Main Pages
+手繪與電繪共用同一個作品詳細頁模板。透過 URL query string 的 `id` 取得作品資料：
 
-網站主要包含以下頁面：
+```text
+artwork.html?id=traditional-001
+artwork.html?id=digital-001
+```
 
-  Page             Description
-  ---------------- ------------------------
-  Home             首頁與精選作品
-  Gallery          完整作品展示與分類篩選
-  Artwork Detail   個別作品詳細介紹
-  About Me         個人介紹
-  Contact          聯絡資訊與社群連結
+詳細頁可顯示：
 
-### 4.2 Home Page
+- 完整作品圖片
+- 作品名稱
+- 作品類型（手繪／電繪）
+- 創作年份
+- 使用媒材（有資料時）
+- 作品尺寸（有資料時）
+- 作品介紹（有資料時）
+- 上一件／下一件作品（若現有功能有提供）
+- 返回 Gallery 的連結
 
-首頁應包含：
+**重要：作品詳細資料畫面不得顯示「創作技法」、「技法分類」或 `category` 欄位。** 即使 JSON 保留 `category` 資料供其他內部用途，也不得在詳細頁顯示該欄位或標籤。
 
-1.  Header
-    -   Logo
-    -   Home
-    -   Gallery
-    -   About Me
-    -   Contact
-2.  Hero Section
-    -   個人作品集主標題。
-    -   簡短介紹。
-    -   日系藝術風格主視覺。
-    -   前往 Gallery 的按鈕。
-3.  Art Categories
-    -   Traditional Art（手繪）
-    -   Digital Art（電繪）
-4.  Featured Works
-    -   精選作品。
-    -   顯示作品縮圖。
-    -   顯示作品名稱與分類。
-    -   可連結至作品詳細頁面。
-5.  About Preview
-    -   簡短個人介紹。
-    -   前往 About Me 的連結。
-6.  Footer
-    -   社群連結。
-    -   Copyright。
-    -   其他聯絡資訊。
+若選用欄位沒有資料，應隱藏整個欄位，不得顯示 `undefined`、`null`、空白標籤或多餘分隔符號。
 
-### 4.3 Gallery Page
+若 URL 缺少 `id`、ID 不存在或資料載入失敗，應顯示清楚且友善的錯誤／空狀態，不得造成整頁 JavaScript 中斷。
 
-Gallery 是網站的核心頁面。
+### 4.4 About（about.html）
 
-必須提供：
+呈現使用者實際提供的個人簡介、創作理念及相關資訊。不得自行捏造姓名、經歷、學歷、作品故事或社群帳號。
 
--   全部作品。
--   手繪作品。
--   電繪作品。
--   依照技法分類。
--   依照創作年份篩選。
--   作品數量顯示。
--   作品卡片展示。
+---
 
-篩選功能必須實際運作，不可以只有視覺按鈕而沒有對應邏輯。
+## 5. 作品資料規範
 
-### 4.4 Artwork Detail Page
+### 資料來源
 
-個別作品頁面應顯示：
+作品資料集中管理於：
 
--   完整作品圖片。
--   作品名稱。
--   作品類型。
--   創作技法。
--   創作年份。
--   使用媒材。
--   作品尺寸（如適用）。
--   作品介紹。
--   上一件作品。
--   下一件作品。
--   返回 Gallery。
+```text
+data/artworks.json
+```
 
-若資料欄位不存在，應妥善隱藏對應資訊，不應顯示 undefined、null
-或空白標籤。
+圖片路徑依專案現有資料夾及 JSON 實際內容為準，不得假設或擅自搬動圖片。
 
-### 4.5 About Me Page
+### 資料格式參考
 
-個人介紹頁面可包含：
-
--   個人簡介。
--   繪畫創作經歷。
--   創作理念。
--   喜歡的繪畫風格。
--   社群平台連結。
-
-尚未提供的個人資訊不得自行編造。
-
-------------------------------------------------------------------------
-
-## 5. Artwork Data Management
-
-### 5.1 Data Management Principle
-
-作品資料應與 HTML、CSS、JavaScript 分離。
-
-第一版使用 JSON 管理作品資訊。
-
-資料檔案：
-
-`data/artworks.json`
-
-作品圖片存放於：
-
-`assets/images/artworks/`
-
-作品縮圖存放於：
-
-`assets/images/thumbnails/`
-
-新增作品時，只需要：
-
-1.  將作品圖片放入指定資料夾。
-2.  將縮圖放入指定資料夾。
-3.  在 artworks.json 新增作品資料。
-4.  網站應自動讀取並顯示新作品。
-
-不應因為新增作品而需要修改 Gallery 的主要程式碼。
-
-### 5.2 Artwork Data Structure
-
-作品資料統一使用以下格式：
-
-``` json
+```json
 {
   "artworks": [
     {
-      "id": "art-001",
-      "title": "Spring Memory",
+      "id": "traditional-001",
+      "title": "作品名稱",
       "type": "traditional",
-      "category": "watercolor",
       "year": 2025,
       "medium": "Watercolor",
       "size": "A4",
-      "image": "assets/images/artworks/art-001.jpg",
-      "thumbnail": "assets/images/thumbnails/art-001.webp",
+      "image": "assets/images/artworks/example.jpg",
+      "thumbnail": "assets/images/thumbnails/example.webp",
       "description": "作品介紹。",
       "featured": true,
-      "alt": "日系風格水彩繪畫作品"
+      "alt": "作品圖片替代文字"
     }
   ]
 }
 ```
 
-### 5.3 Required Fields
+以上僅為欄位示意。實際修改前必須先檢查目前 `artworks.json` 的欄位名稱及資料格式，不能直接假設與範例完全相同。
 
-  Field       Description
-  ----------- --------------------
-  id          作品唯一識別碼
-  title       作品名稱
-  type        手繪或電繪
-  category    繪畫技法或作品類型
-  year        創作年份
-  image       原始作品圖片路徑
-  thumbnail   作品縮圖路徑
-  alt         圖片替代文字
+### 欄位原則
 
-### 5.4 Optional Fields
+- `id`：每件作品唯一識別碼。
+- `title`：作品名稱。
+- `type`：主要作品類型，只使用 `traditional` 或 `digital`。
+- `year`：創作年份。
+- `image`：原始作品圖片路徑。
+- `thumbnail`：縮圖路徑（若有使用）。
+- `medium`、`size`、`description`、`featured`、`alt`：依實際需求選用。
+- `category` 若存在，僅能依既有資料用途保留；不得將其顯示為作品詳細頁的「創作技法」欄位，也不得自行新增技法篩選 UI。
 
-  Field         Description
-  ------------- ----------------
-  medium        使用媒材
-  size          作品尺寸
-  description   作品介紹
-  featured      是否為精選作品
+### 資料保護
 
-如果未來有新增需求，可以擴充資料欄位，但必須保持既有資料相容性。
+- 不得自行修改作品名稱、描述、年份、媒材或尺寸。
+- 不得自行推測缺漏資料。
+- 不得任意更改既有 ID 或 JSON 欄位名稱。
+- 不得刪除作品或覆蓋原始圖片，除非使用者明確要求。
+- 修改 JSON 後必須驗證 JSON 語法及所有受影響的圖片路徑。
 
-### 5.5 Artwork Type Classification
+---
 
-作品必須分為兩種主要類型：
+## 6. Gallery、篩選與排序
 
-  Value         Display Name             Description
-  ------------- ------------------------ --------------------------
-  traditional   Traditional Art / 手繪   紙本、畫布等實體媒材創作
-  digital       Digital Art / 電繪       使用數位繪圖工具創作
+### 作品卡片
 
-注意：
+- 作品卡片由 JSON 動態產生，不得將每件作品硬編碼在 HTML。
+- 每張作品卡片應能辨識作品 ID，並連到共用詳細頁。
+- 首頁 Featured Works 與 Gallery 的卡片連結必須遵循相同的詳細頁 URL 規則。
+- 不得因為卡片位於不同頁面，就產生不同的作品詳細頁解析方式。
 
-`type` 代表作品的主要創作方式，不代表繪畫技法。
+### 篩選
 
-### 5.6 Artwork Category Classification
+- 全站不顯示「創作技法」篩選器。
+- Gallery 可篩選全部／手繪／電繪及年份。
+- 若有排序選項，必須實際改變作品排列。
+- 篩選條件可組合使用，切換條件後應同步更新作品清單及數量。
+- 沒有符合條件的作品時，顯示友善空狀態。
+- 不得只修改篩選器外觀而未實作資料篩選。
 
-`category` 代表作品的技法或內容類型。
+### 排序
 
-初期可以使用：
+若網站提供排序功能，至少確保各選項有實際效果，例如年份新到舊、年份舊到新及原始順序。排序時不得修改原始作品資料陣列；應使用副本處理。
 
-  Value              Display Name
-  ------------------ ------------------
-  sketch             Sketch
-  watercolor         Watercolor
-  colored-pencil     Colored Pencil
-  acrylic            Acrylic
-  illustration       Illustration
-  character-design   Character Design
-  digital-painting   Digital Painting
-  concept-art        Concept Art
+---
 
-分類應依實際作品內容彈性擴充。
+## 7. 詳細頁導向與 Lightbox 規範（重要）
 
-不得強迫顯示尚未使用的分類。
+本專案同時具有「作品詳細介紹頁」及「圖片 Lightbox」，兩者用途不同，必須明確區分。
 
-### 5.7 Important Data Rules
+### 7.1 一般作品卡片
 
--   每件作品必須有唯一 id。
--   `type` 只能使用 `traditional` 或 `digital`。
--   `category` 不得與 `type` 混用。
--   年份必須使用數字。
--   圖片路徑必須正確。
--   不得覆蓋原始作品圖片。
--   不得自行更改作品名稱或描述。
--   不得自行編造作品媒材及創作年份。
--   JSON 格式必須符合標準語法。
--   新增作品不得影響既有作品資料。
+一般作品卡片點擊時，預設行為必須是導向作品詳細介紹頁：
 
-------------------------------------------------------------------------
+```html
+<a href="artwork.html?id=traditional-001">...</a>
+```
 
-## 6. File Management
+不可由 Lightbox 的事件監聽器攔截一般作品卡片連結，也不可對一般作品卡片呼叫 `event.preventDefault()`。
 
-### 6.1 Project Directory
+### 7.2 Lightbox
 
-建議使用以下專案架構：
+只有明確標記為 Lightbox 觸發器的元素，才可以開啟 Lightbox，例如：
 
-``` text
-art-portfolio/
-│
+```html
+<a href="..." data-lightbox>...</a>
+```
+
+Lightbox 事件監聽器必須先檢查觸發元素是否具有 `data-lightbox`。未標記的作品卡片連結應保留瀏覽器預設導向行為。
+
+參考邏輯：
+
+```javascript
+document.addEventListener('click', event => {
+  const trigger = event.target.closest('[data-lightbox]');
+  if (!trigger) return;
+
+  // 僅在確認為 Lightbox 觸發器後，才執行 Lightbox 開啟流程。
+});
+```
+
+如果目前 Lightbox 使用其他明確的觸發選擇器，應沿用並確保不會攔截一般作品卡片連結。
+
+### 7.3 Lightbox 功能
+
+依現有功能支援圖片放大、縮小、全螢幕、上一張／下一張、關閉按鈕、點擊背景關閉及 ESC 關閉。修改 Lightbox 時不得破壞作品詳細頁導向。
+
+---
+
+## 8. JavaScript 與程式品質
+
+- 各 JS 模組維持單一、清楚的責任。
+- 沿用現有全域物件、函式及載入順序；修改前先檢查實際定義。
+- 不得假設某個 utility function、DOM ID 或 CSS class 存在，必須先查證。
+- DOM 元素可能不存在時，應先檢查再操作。
+- Fetch JSON 必須處理 HTTP 錯誤、JSON 解析錯誤及空資料。
+- 動態插入 HTML 時，對作品名稱、描述等文字進行適當 HTML escaping，避免直接插入未處理的外部文字。
+- 事件監聽器不可重複綁定，亦不可攔截不屬於自身功能的操作。
+- 不得留下無作用按鈕、未完成事件或只做外觀的假功能。
+- 不要為了小型修改而重寫整個 JS 模組。
+
+---
+
+## 9. 檔案與目錄管理
+
+以目前 Repository 的實際目錄為準。可能包含以下檔案：
+
+```text
+PersonalArtGallery/
 ├── AGENTS.md
 ├── README.md
 ├── index.html
 ├── gallery.html
 ├── artwork.html
 ├── about.html
-│
 ├── assets/
-│   ├── images/
-│   │   ├── artworks/
-│   │   ├── thumbnails/
-│   │   └── profile/
-│   │
-│   ├── icons/
-│   └── fonts/
-│
 ├── css/
 │   ├── variables.css
 │   ├── base.css
@@ -420,544 +303,150 @@ art-portfolio/
 │   ├── gallery.css
 │   ├── artwork.css
 │   └── responsive.css
-│
-├── js/
-│   ├── main.js
-│   ├── data.js
-│   ├── gallery.js
-│   ├── filter.js
-│   ├── artwork.js
-│   ├── lightbox.js
-│   └── utils.js
-│
-└── data/
-    └── artworks.json
+├── data/
+│   └── artworks.json
+└── js/
+    ├── main.js
+    ├── data.js
+    ├── gallery.js
+    ├── filter.js
+    ├── artwork.js
+    ├── lightbox.js
+    └── utils.js
 ```
 
-### 6.2 File Responsibilities
+此為參考結構，不代表每個檔案必然存在。**若目前專案結構與範例不同，必須沿用現有結構，不得為了符合範例而任意搬檔或重建專案。**
 
-  File             Responsibility
-  ---------------- --------------------
-  index.html       首頁
-  gallery.html     作品展示頁
-  artwork.html     作品詳細介紹
-  about.html       個人介紹
-  variables.css    全站色彩及設計變數
-  base.css         全站基本樣式
-  layout.css       頁面排版
-  components.css   共用 UI 元件
-  gallery.css      作品展示樣式
-  artwork.css      作品詳細頁樣式
-  responsive.css   響應式設計
-  main.js          全站共用初始化
-  data.js          載入作品資料
-  gallery.js       作品展示邏輯
-  filter.js        分類與篩選邏輯
-  artwork.js       作品詳細頁邏輯
-  lightbox.js      圖片放大功能
-  utils.js         共用工具函式
-  artworks.json    作品資料
+檔名使用清楚、一致的英文命名。未經使用者同意，不得任意重新命名、移動或刪除檔案。
 
-若專案已有不同但合理的架構，應優先沿用既有架構，不得為了符合上述範例而任意重建整個專案。
+---
 
-### 6.3 File Naming Rules
+## 10. GitHub Pages 與路徑
 
--   檔案名稱使用英文。
--   使用小寫字母。
--   多個單字使用連字號 `-`。
--   作品圖片使用一致的命名規則。
--   避免使用空格及特殊符號。
+- 網站為靜態網站，部署於 GitHub Pages。
+- 優先使用相對路徑，避免使用會指向網域根目錄的 `/css/...`、`/assets/...` 等路徑。
+- 所有頁面連結、CSS、JS、JSON 及圖片路徑，都必須考慮 Repository 子路徑。
+- 使用 Fetch API 讀取 JSON 時，開發階段必須透過 HTTP Server 執行，不應直接以 `file://` 開啟。
+- 可使用 VS Code Live Server 或其他本機 HTTP Server。
 
-例如：
+---
 
-``` text
-art-001.jpg
-art-002.jpg
-art-003.webp
-```
+## 11. 響應式設計、效能與無障礙
 
-------------------------------------------------------------------------
+### 響應式
 
-## 7. Code Architecture
+- 支援桌面、平板及手機。
+- 使用 Grid、Flexbox 及合理斷點。
+- 不依賴固定寬度造成手機版溢出。
+- 圖片應維持適當比例，不可拉伸變形。
+- 導覽列、按鈕及 Lightbox 必須適合觸控操作。
+- 不應出現非預期水平捲動。
 
-### 7.1 Modular Development
+### 效能
 
-JavaScript 必須依照功能拆分。
+- Gallery 優先載入縮圖，詳細頁再載入原始圖片。
+- 可使用 `loading="lazy"` 延遲載入非首屏圖片。
+- 避免重複載入資源及不必要 DOM 操作。
+- 圖片載入失敗時提供合理替代顯示。
 
-避免將所有程式碼集中在單一 JavaScript 檔案。
+### 無障礙
 
-每個模組應具有明確責任。
+- 作品圖片提供有意義的 `alt`。
+- 使用語意化 HTML。
+- 按鈕及連結具有清楚名稱。
+- 主要功能可使用鍵盤操作。
+- 不只依賴顏色傳達資訊。
 
-### 7.2 Data Loading
+---
 
-作品資料透過 Fetch API 載入 JSON。
+## 12. AI Agent 工作流程
 
-``` javascript
-async function loadArtworks() {
-  try {
-    const response = await fetch('data/artworks.json');
+### 12.1 修改前
 
-    if (!response.ok) {
-      throw new Error('Failed to load artwork data');
-    }
+1. 閱讀本文件。
+2. 檢查目前專案目錄與 Git 狀態。
+3. 閱讀本次需求涉及的 HTML、CSS、JS 及 JSON。
+4. 確認實際 DOM ID、CSS class、函式名稱、資料欄位及 script 載入順序。
+5. 找出問題根因後再提出修改方案。
 
-    const data = await response.json();
+不得只根據檔名或舊對話猜測程式內容。不得假設先前提供的程式碼已經套用。
 
-    return data.artworks || [];
-  } catch (error) {
-    console.error('Artwork loading error:', error);
-    return [];
-  }
-}
-```
+### 12.2 修改中
 
-注意：
+- 採取最小必要修改（minimal changes）。
+- 優先保留現有版面、資料、功能及命名。
+- 不得任意重寫整站或更換技術架構。
+- 不得自行增加使用者未要求的功能。
+- 若需求與現有架構衝突，先說明影響及選項，不可默默大幅改造。
+- 不得刪除使用者作品或替換原始圖片。
 
--   不可假設 JSON 一定成功載入。
--   必須處理資料載入失敗。
--   必須處理空作品清單。
--   不得直接操作不存在的 DOM 元素。
--   動態產生的 HTML 必須注意資料安全，避免直接插入未經處理的使用者文字。
+### 12.3 修改後
 
-### 7.3 Gallery Rendering
+應檢查：
 
-Gallery 必須根據 JSON 資料動態產生作品卡片。
+1. 修改檔案及差異是否符合需求。
+2. JavaScript 語法及 Console 錯誤。
+3. JSON 是否可正常解析。
+4. DOM selector 是否存在。
+5. 圖片與資源路徑是否有效。
+6. 首頁 Featured Works 是否能進入正確詳細頁。
+7. Gallery 全部作品、手繪、電繪是否能進入正確詳細頁。
+8. 詳細頁是否正確顯示作品資料，且沒有「創作技法」欄位。
+9. Lightbox 是否只由明確觸發器開啟，不攔截一般作品卡片導向。
+10. 桌面與手機版是否正常。
+11. GitHub Pages 子路徑是否正常。
 
-不得將每件作品硬編碼在 HTML 中。
+若無法實際執行瀏覽器測試，必須明確說明「已檢查程式碼但尚未完成瀏覽器實測」，不得宣稱已完全驗證。
 
-新增作品時，應自動出現在 Gallery。
+### 12.4 回覆格式
 
-### 7.4 Filtering System
+完成修改後，簡要回報：
 
-篩選功能至少支援：
+- 修改原因／問題根因。
+- 修改了哪些檔案。
+- 每個檔案的修改內容。
+- 已完成的測試項目。
+- 尚未測試或需要使用者確認的項目。
 
-1.  All：全部作品。
-2.  Traditional：手繪作品。
-3.  Digital：電繪作品。
-4.  Category：依技法篩選。
-5.  Year：依年份篩選。
+若只需修改少數檔案，不要要求使用者整份重建或覆蓋整個專案。
 
-篩選條件應可以組合使用。
+---
 
-例如：
+## 13. 回歸測試清單
 
-`手繪 + 水彩 + 2025`
+### 頁面與導覽
 
-切換分類時，必須同步更新作品數量及展示結果。
-
-如果沒有符合條件的作品，應顯示友善的空狀態訊息。
-
-### 7.5 Sorting
-
-若提供排序功能，應確保：
-
--   年份由新到舊。
--   年份由舊到新。
--   依資料原始順序顯示。
-
-排序必須實際改變作品排列，不得只有按鈕樣式變化。
-
-------------------------------------------------------------------------
-
-## 8. Image Viewer / Lightbox
-
-### 8.1 Core Requirements
-
-作品圖片必須支援放大瀏覽。
-
-Lightbox 應具備：
-
--   點擊作品圖片開啟。
--   顯示完整作品圖片。
--   放大與縮小。
--   全螢幕瀏覽。
--   上一張作品。
--   下一張作品。
--   關閉按鈕。
--   點擊背景關閉。
--   ESC 關閉。
-
-### 8.2 Keyboard Controls
-
-  Key   Action
-  ----- ---------------
-  ESC   關閉 Lightbox
-  ←     上一張作品
-  →     下一張作品
-  \+    放大
-  \-    縮小
-
-### 8.3 Interaction Rules
-
--   開啟 Lightbox 時，應避免背景頁面不必要的捲動。
--   關閉後應恢復原本的捲動狀態。
--   必須提供清楚的關閉按鈕。
--   手機裝置應支援觸控操作。
--   圖片不得超出螢幕可視範圍。
--   全螢幕模式應能正常進入與退出。
--   Lightbox 開啟時應正確管理鍵盤焦點。
--   不可讓圖片放大後無法關閉。
-
-------------------------------------------------------------------------
-
-## 9. Responsive Design
-
-### 9.1 Device Support
-
-網站必須支援：
-
--   Desktop
--   Laptop
--   Tablet
--   Mobile
-
-### 9.2 Responsive Principles
-
--   使用 CSS Grid 與 Flexbox。
--   使用相對單位及適當的斷點。
--   不依賴固定寬度設計。
--   圖片必須自動縮放。
--   手機版導覽列應能正常使用。
--   按鈕與互動區域必須方便觸控。
--   文字不得超出容器。
--   不可出現非預期的水平捲動。
-
-### 9.3 Suggested Breakpoints
-
-``` css
-/* Mobile */
-@media (max-width: 576px) {}
-
-/* Tablet */
-@media (min-width: 577px) and (max-width: 992px) {}
-
-/* Desktop */
-@media (min-width: 993px) {}
-```
-
-實際斷點可依版面需求調整。
-
-### 9.4 Gallery Grid
-
-建議：
-
-  Device    Columns
-  --------- ---------
-  Mobile    1--2
-  Tablet    2--3
-  Desktop   3--4
-
-應依作品圖片比例及實際畫面空間調整。
-
-------------------------------------------------------------------------
-
-## 10. Performance & Accessibility
-
-### 10.1 Image Optimization
-
--   優先使用 WebP 格式作為縮圖。
--   原始作品圖片應保留高解析度。
--   Gallery 使用縮圖，避免一次載入大量原始圖片。
--   使用 Lazy Loading。
--   圖片應設定適當的 width、height 或 aspect-ratio。
--   圖片載入失敗時應有替代顯示方式。
--   不得因壓縮而嚴重損害作品畫質。
-
-### 10.2 Accessibility
-
--   所有作品圖片應有 alt。
--   按鈕應具有明確功能名稱。
--   使用語意化 HTML。
--   確保文字與背景具有足夠對比。
--   鍵盤可以操作主要功能。
--   不可只依靠顏色傳達分類資訊。
-
-### 10.3 Performance
-
--   避免不必要的 JavaScript。
--   避免重複載入 CSS。
--   避免大量 DOM 操作。
--   使用適當的圖片尺寸。
--   不得讓圖片載入阻塞主要頁面內容。
--   維持良好的手機瀏覽效能。
-
-------------------------------------------------------------------------
-
-## 11. GitHub Pages Deployment
-
-### 11.1 Deployment Target
-
-網站使用 GitHub Pages 部署。
-
-必須確保網站在 GitHub Pages 的子路徑環境下正常運作。
-
-### 11.2 Relative Path Rules
-
-所有資源路徑應優先使用相對路徑。
-
-正確範例：
-
-``` html
-<link rel="stylesheet" href="css/base.css">
-<script src="js/main.js" defer></script>
-```
-
-錯誤範例：
-
-``` html
-<link rel="stylesheet" href="/css/base.css">
-```
-
-原因：
-
-GitHub Pages 專案網站通常會部署於：
-
-`https://username.github.io/repository-name/`
-
-使用根目錄絕對路徑可能造成 CSS、JavaScript 及圖片無法載入。
-
-### 11.3 Local Development
-
-由於作品資料使用 Fetch API 載入 JSON，不應直接使用 `file://` 開啟 HTML。
-
-開發時應透過本機 HTTP Server 執行，例如：
-
--   VS Code Live Server。
--   Python HTTP Server。
--   其他本機開發伺服器。
-
-### 11.4 Deployment Checklist
-
-部署前必須確認：
-
--   所有 HTML 頁面正常。
--   CSS 路徑正確。
--   JavaScript 路徑正確。
--   JSON 可以成功載入。
--   圖片可以正常顯示。
--   Gallery 篩選正常。
--   Lightbox 正常。
--   手機版排版正常。
--   GitHub Pages 子路徑正常。
-
-------------------------------------------------------------------------
-
-## 12. AI Development Instructions
-
-本章是所有 AI Coding Agent 必須遵守的開發規範。
-
-### 12.1 Before Development
-
-開始任何修改之前，必須：
-
-1.  閱讀本 AGENTS.md。
-2.  檢查目前專案目錄。
-3.  確認目前有哪些 HTML、CSS、JavaScript 檔案。
-4.  確認現有作品資料結構。
-5.  確認目前網站已經完成的功能。
-6.  找出與本次需求相關的程式碼。
-
-不得在尚未理解現有架構的情況下直接修改。
-
-### 12.2 Preserve Existing Code
-
-修改網站時：
-
--   優先修改必要的程式碼。
--   保留現有功能。
--   保留既有 CSS Variables。
--   保留現有作品資料。
--   不得任意刪除檔案。
--   不得任意重新命名檔案。
--   不得直接重寫整個網站。
--   不得為了增加新功能而破壞既有功能。
-
-如果發現目前架構不適合新增功能，應先說明問題及建議方案。
-
-### 12.3 Design Consistency
-
-所有新增功能必須遵守：
-
--   Japanese Pastel Art Gallery 設計方向。
--   淺粉色與淺綠色的配色系統。
--   奶油白背景。
--   簡潔、清新、日系的視覺風格。
--   現有字體、間距、圓角及陰影規範。
-
-不得未經確認就改變整體網站風格。
-
-### 12.4 Functional Integrity
-
-新增功能時：
-
--   必須確保功能可以實際運作。
--   不得只製作靜態 UI。
--   不得使用沒有作用的按鈕。
--   不得留下無法執行的事件監聽器。
--   不得使用虛構資料冒充真實作品。
--   必須處理錯誤及空資料狀態。
-
-### 12.5 Data Protection
-
-作品圖片及作品資料屬於重要內容。
-
-AI 不得：
-
--   未經確認刪除作品。
--   覆蓋原始作品圖片。
--   自行修改作品資訊。
--   任意更改 JSON 欄位名稱。
--   將手繪與電繪分類混為一談。
-
-若必須變更資料結構，應保留舊資料的相容性，並說明遷移方式。
-
-### 12.6 Dependency Management
-
--   優先使用原生 HTML、CSS、JavaScript。
--   不得隨意增加框架。
--   不得隨意增加 npm 套件。
--   不得使用不必要的外部 API。
--   若新增第三方函式庫，必須說明用途及必要性。
-
-### 12.7 Change Management
-
-若涉及以下重大修改，必須先向使用者說明：
-
--   整體 UI 重新設計。
--   專案資料夾結構變更。
--   技術架構變更。
--   JSON 資料結構變更。
--   大量修改既有程式碼。
--   刪除或替換既有功能。
--   引入大型第三方套件。
-
-### 12.8 After Development
-
-完成修改後必須：
-
-1.  說明修改了哪些檔案。
-2.  說明新增了哪些功能。
-3.  確認原有功能是否正常。
-4.  檢查 JavaScript 是否有錯誤。
-5.  檢查 JSON 格式。
-6.  檢查圖片路徑。
-7.  檢查桌面版及手機版。
-8.  確認 GitHub Pages 部署路徑。
-
-如果無法實際執行測試，必須明確告知，不得宣稱已完成測試。
-
-------------------------------------------------------------------------
-
-## 13. Testing Checklist
-
-每次修改完成後，應依照以下項目進行檢查。
-
-### 13.1 Basic Functions
-
--   [ ] 首頁正常顯示。
--   [ ] 導覽列正常運作。
--   [ ] Gallery 正常顯示。
--   [ ] JSON 正常載入。
--   [ ] 作品圖片正常顯示。
--   [ ] 手繪分類正常。
--   [ ] 電繪分類正常。
--   [ ] 技法篩選正常。
--   [ ] 年份篩選正常。
--   [ ] 多重篩選正常。
--   [ ] 作品詳細頁正常。
--   [ ] 上一件／下一件作品正常。
-
-### 13.2 Lightbox
-
--   [ ] 點擊圖片可以開啟。
--   [ ] 圖片可以放大。
--   [ ] 圖片可以縮小。
--   [ ] 可以進入全螢幕。
--   [ ] 可以退出全螢幕。
--   [ ] ESC 可以關閉。
--   [ ] 左右方向鍵可以切換作品。
--   [ ] 點擊背景可以關閉。
--   [ ] 手機觸控操作正常。
-
-### 13.3 Responsive
-
--   [ ] 桌面版排版正常。
--   [ ] 平板版排版正常。
--   [ ] 手機版排版正常。
--   [ ] 圖片沒有變形。
--   [ ] 文字沒有溢出。
--   [ ] 沒有非預期水平捲動。
--   [ ] 按鈕可以正常觸控。
-
-### 13.4 Deployment
-
--   [ ] GitHub Pages 首頁正常。
--   [ ] CSS 正常載入。
--   [ ] JavaScript 正常載入。
--   [ ] JSON 正常載入。
--   [ ] 圖片路徑正確。
--   [ ] 頁面內部連結正常。
-
-------------------------------------------------------------------------
-
-## 14. Future Development
-
-未來可以依需求逐步擴充：
-
-### Phase 1 --- Basic Portfolio
-
--   個人首頁。
--   手繪與電繪分類。
--   Gallery。
--   作品詳細介紹。
--   Lightbox。
--   響應式設計。
-
-### Phase 2 --- Enhanced Gallery
-
--   更多作品篩選條件。
--   作品排序。
--   精選作品。
--   收藏功能（如有需求）。
--   作品標籤。
--   更完整的作品介紹。
-
-### Phase 3 --- Advanced Features
-
--   個人作品管理後台。
--   作品新增及編輯介面。
--   圖片上傳功能。
--   雲端資料儲存。
--   社群分享。
--   多語言支援。
-
-以上功能皆屬於未來擴充項目，第一階段不應為了預留功能而增加不必要的複雜度。
-
-------------------------------------------------------------------------
-
-## 15. Core Development Principles
-
-所有 AI 開發工具必須遵守以下原則：
-
-1.  **Preserve First**：優先保留既有程式碼及功能。
-2.  **Minimal Changes**：只修改本次需求必要的部分。
-3.  **Consistent Design**：維持日系粉彩藝術畫廊的視覺風格。
-4.  **Data Separation**：作品資料與前端程式分離。
-5.  **Modular Architecture**：保持程式碼模組化。
-6.  **Responsive First**：所有功能必須兼顧手機與桌面。
-7.  **Functional UI**：所有互動元件都必須真正可用。
-8.  **Protect Artwork**：不得擅自刪除、覆蓋或修改使用者的原始作品。
-9.  **GitHub Pages Compatible**：所有資源路徑必須支援 GitHub Pages。
-10. **Explain Changes**：每次修改都必須清楚說明變更內容。
-
-### Final Instruction
-
-本專案的核心目標是建立一個具有日系清新風格的個人繪畫作品展示網站。
-
-在任何開發工作中，請優先考慮：
-
-**作品展示品質 \> 使用者瀏覽體驗 \> 網站功能完整性 \> 程式架構擴充性**
-
-不要為了增加技術複雜度而犧牲網站的簡潔性與作品本身的視覺呈現。
-
-所有開發工作都應以本文件為主要依據。
+- [ ] 首頁正常顯示。
+- [ ] Featured Works 每件作品可進入正確詳細頁。
+- [ ] Gallery 全部作品正常顯示。
+- [ ] Gallery 手繪及電繪分類正常。
+- [ ] Gallery 作品卡片點擊後進入詳細頁，而非意外開啟 Lightbox。
+- [ ] 手繪及電繪共用詳細頁模板。
+- [ ] About 頁面正常。
+
+### 篩選與詳細資料
+
+- [ ] 作品類型篩選正常。
+- [ ] 年份篩選正常。
+- [ ] 排序功能正常。
+- [ ] 詳細頁作品名稱正確。
+- [ ] 詳細頁作品類型正確。
+- [ ] 詳細頁年份、媒材、尺寸及介紹依資料顯示。
+- [ ] 詳細頁不顯示「創作技法」或 `category` 欄位。
+- [ ] 不存在的作品 ID 有友善錯誤狀態。
+
+### Lightbox
+
+- [ ] 明確標記的 Lightbox 觸發器可開啟。
+- [ ] 一般作品卡片不會被 Lightbox 攔截。
+- [ ] 放大／縮小正常（若現有功能提供）。
+- [ ] 全螢幕進出正常（若現有功能提供）。
+- [ ] ESC 及關閉按鈕正常。
+- [ ] 上一張／下一張正常（若現有功能提供）。
+
+### 部署與裝置
+
+- [ ] CSS、JS、JSON 及圖片路徑正常。
+- [ ] GitHub Pages 子路徑正常。
+- [ ] 桌面版、平板版及手機版正常。
+- [ ] 無非預期水平捲動或圖片變形。

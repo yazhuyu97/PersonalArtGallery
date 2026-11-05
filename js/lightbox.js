@@ -15,23 +15,33 @@ window.ArtworkLightbox = {
     const open = item => { const i = available.findIndex(a => a.id === item.id); if (i < 0) return; previousFocus = document.activeElement; show(i); box.hidden = false; document.body.style.overflow = 'hidden'; box.querySelector('[data-lightbox-close]').focus(); };
     document.addEventListener('click', event => {
       const link = event.target.closest('.artwork-card a');
-      if (link) { const id = new URL(link.href).searchParams.get('id'); const item = artworks.find(a => a.id === id); if (item?.image) { event.preventDefault(); open(item); } }
+
+      // 只有明確標記 data-lightbox 的連結才開啟圖片檢視器
+      if (!link || !link.hasAttribute('data-lightbox')) return;
+
+      const id = new URL(link.href).searchParams.get('id');
+      const item = artworks.find(a => a.id === id);
+
+      if (item?.image) {
+        event.preventDefault();
+        open(item);
+      }
     });
     box.querySelector('[data-lightbox-close]').addEventListener('click', close);
-    box.querySelector('[data-lightbox-prev]').addEventListener('click', () => show(current-1));
-    box.querySelector('[data-lightbox-next]').addEventListener('click', () => show(current+1));
-    box.querySelector('[data-zoom-in]').addEventListener('click', () => { zoom = Math.min(zoom+.2, 3); image.style.transform = `scale(${zoom})`; });
-    box.querySelector('[data-zoom-out]').addEventListener('click', () => { zoom = Math.max(zoom-.2, .5); image.style.transform = `scale(${zoom})`; });
+    box.querySelector('[data-lightbox-prev]').addEventListener('click', () => show(current - 1));
+    box.querySelector('[data-lightbox-next]').addEventListener('click', () => show(current + 1));
+    box.querySelector('[data-zoom-in]').addEventListener('click', () => { zoom = Math.min(zoom + .2, 3); image.style.transform = `scale(${zoom})`; });
+    box.querySelector('[data-zoom-out]').addEventListener('click', () => { zoom = Math.max(zoom - .2, .5); image.style.transform = `scale(${zoom})`; });
     box.querySelector('[data-fullscreen]').addEventListener('click', async () => { try { if (!document.fullscreenElement) await box.requestFullscreen(); else await document.exitFullscreen(); } catch (e) { console.warn('Fullscreen unavailable', e); } });
     box.addEventListener('click', e => { if (e.target === box) close(); });
     document.addEventListener('keydown', e => {
       if (box.hidden) return;
       if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') show(current-1);
-      if (e.key === 'ArrowRight') show(current+1);
-      if (e.key === '+') { zoom = Math.min(zoom+.2,3); image.style.transform = `scale(${zoom})`; }
-      if (e.key === '-') { zoom = Math.max(zoom-.2,.5); image.style.transform = `scale(${zoom})`; }
-      if (e.key === 'Tab') { const focusable = [...box.querySelectorAll('button')]; const first=focusable[0], last=focusable[focusable.length-1]; if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();} else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();} }
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+      if (e.key === '+') { zoom = Math.min(zoom + .2, 3); image.style.transform = `scale(${zoom})`; }
+      if (e.key === '-') { zoom = Math.max(zoom - .2, .5); image.style.transform = `scale(${zoom})`; }
+      if (e.key === 'Tab') { const focusable = [...box.querySelectorAll('button')]; const first = focusable[0], last = focusable[focusable.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
     });
   }
 };
