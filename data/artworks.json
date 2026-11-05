@@ -1,0 +1,77 @@
+{
+  "artworks": [
+      {
+        "id": "digital-001",
+        "title": "Gura",
+        "type": "digital",
+        "category": "digital",
+        "technique": "電繪",
+        "year": 2022,
+        "description": "慶祝Gura首次發布個人單曲。",
+        "image": "assets/images/artworks/digital-001.PNG",
+        "thumbnail": "assets/images/artworks/digital-001.PNG",
+        "featured": true
+    },
+    {
+        "id": "digital-002",
+        "title": "Hololive-EN",
+        "type": "digital",
+        "category": "digital",
+        "technique": "電繪",
+        "year": 2023,
+        "description": "Hololive-EN神話組。",
+        "image": "assets/images/artworks/digital-002.PNG",
+        "thumbnail": "assets/images/artworks/digital-002.PNG",
+        "featured": true
+    },
+    {
+        "id": "digital-003",
+        "title": "Ninomae Ina'nis",
+        "type": "digital",
+        "category": "digital",
+        "technique": "電繪",
+        "year": 2024,
+        "description": "Hololive「古神祭司」，擁有大佬等級的繪畫能力。",
+        "image": "assets/images/artworks/digital-003.PNG",
+        "thumbnail": "assets/images/artworks/digital-003.PNG",
+        "featured": true
+    },
+    {
+        "id": "traditional-001",
+        "title": "Nanashi Mumei",
+        "type": "traditional",
+        "category": "traditional",
+        "technique": "鉛筆",
+        "year": 2020,
+        "description": "文明的守護者、一隻愛旅行的貓頭鷹。",
+        "image": "assets/images/artworks/traditional-001.PNG",
+        "thumbnail": "assets/images/artworks/traditional-001.PNG",
+        "featured": true
+    },
+    {
+        "id": "traditional-002",
+        "title": "Gura'A'",
+        "type": "traditional",
+        "category": "traditional",
+        "technique": "鉛筆",
+        "year": 2021,
+        "description": "紀念Gura初次直播名場面。",
+        "image": "assets/images/artworks/traditional-002.PNG",
+        "thumbnail": "assets/images/artworks/traditional-002.PNG",
+        "featured": true
+    },
+    {
+        "id": "traditional-003",
+        "title": "Ninomae Ina'nis日常版",
+        "type": "traditional",
+        "category": "traditional",
+        "technique": "鉛筆",
+        "year": 2022,
+        "description": "自己設計的日常風Ina。",
+        "image": "assets/images/artworks/traditional-003.PNG",
+        "thumbnail": "assets/images/artworks/traditional-003.PNG",
+        "featured": true
+    }
+
+  ]
+}

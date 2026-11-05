@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="個人繪畫作品集，收藏手繪與電繪創作。">
+  <title>Personal Art Gallery｜我的作品集</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Personal Art Gallery 首頁"><span class="brand-mark">✿</span> little art
+      journal</a>
+    <button class="menu-toggle" aria-label="開啟導覽選單" aria-expanded="false">☰</button>
+    <nav class="site-nav" aria-label="主要導覽">
+      <a class="active" href="index.html">Home</a><a href="gallery.html">Gallery</a>
+      <a href="about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">A LITTLE SPACE FOR ART &amp; STORIES</p>
+        <h1>把日常的靈感，<br><span>刻劃成喜歡的模樣。</span></h1>
+        <p class="hero-description">這裡是我的小小創作角落，收錄手繪與電繪作品。希望每一幅畫，都能留住一點溫柔的時光。</p>
+        <a class="button button-primary" href="gallery.html">探索作品 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-art" aria-label="藝術作品展示區">
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="hero-note note-top">draw your<br>own story</div>
+        <div class="hero-flower" aria-hidden="true">✿</div>
+        <div class="hero-note note-bottom">made with<br>little moments ♡</div>
+      </div>
+    </section>
+
+    <section class="section-wrap category-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">EXPLORE BY STYLE</p>
+          <h2>Find your favorite</h2>
+        </div>
+        <p>用不同的方式，記錄不同的心情。</p>
+      </div>
+      <div class="category-grid">
+        <a class="category-card traditional-card" href="gallery.html?type=traditional"><span class="category-number">01
+            / TRADITIONAL</span><span class="category-icon">✎</span>
+          <h3>Traditional Art</h3>
+          <p>手繪作品・紙本</p><span class="category-arrow">↗</span>
+        </a>
+        <a class="category-card digital-card" href="gallery.html?type=digital"><span class="category-number">02 /
+            DIGITAL</span><span class="category-icon">✧</span>
+          <h3>Digital Art</h3>
+          <p>電繪作品・數位創作</p><span class="category-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-wrap featured-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SELECTED ARTWORKS</p>
+          <h2>Featured works</h2>
+        </div><a class="text-link" href="gallery.html">View all works ↗</a>
+      </div>
+      <div id="featured-grid" class="artwork-grid">
+        <p class="loading-message">正在整理作品⋯</p>
+      </div>
+    </section>
+
+    <section class="about-preview section-wrap">
+      <div class="about-decoration" aria-hidden="true">♡</div>
+      <div>
+        <p class="eyebrow">A LITTLE ABOUT ME</p>
+        <h2>每一筆，都是<br>生活留下的痕跡。</h2>
+      </div>
+      <div>
+        <p>我喜歡觀察生活裡細小而美好的事物，並試著用畫筆把它們留下。更多關於我的創作故事，歡迎到 About Me 逛逛。</p><a class="text-link" href="about.html">More about
+          me ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="site-footer">
+    <div><a class="brand" href="index.html">✿ little art journal</a>
+      <p>Thank you for stopping by.</p>
+    </div>
+    <div class="footer-right">
+      <p>Contact &amp; Social</p><span>可以在 About Me 頁面了解我喔٩꒰｡•◡•｡꒱۶♡</span>
+    </div><small>© <span data-current-year></span> Personal Art Gallery. All rights reserved.</small>
+  </footer>
+</body>
+
+</html>

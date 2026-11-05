@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery｜Personal Art Gallery</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+  <script src="js/filter.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">✿</span> little art
+      journal</a><button class="menu-toggle" aria-label="開啟導覽選單" aria-expanded="false">☰</button>
+    <nav class="site-nav" aria-label="主要導覽"><a href="index.html">Home</a><a class="active"
+        href="gallery.html">Gallery</a><a href="about.html">About Me</a></nav>
+  </header>
+  <main class="section-wrap page-main">
+    <div class="page-intro">
+      <p class="eyebrow">A COLLECTION OF MOMENTS</p>
+      <h1>My Gallery<span class="title-flower">✿</span></h1>
+      <p>每一件作品，都收藏著一段創作時光。</p>
+    </div>
+    <section class="gallery-toolbar" aria-label="作品篩選">
+      <div class="filter-row"><label class="sr-only" for="type-filter">作品類型</label><select id="type-filter">
+          <option value="all">全部作品</option>
+          <option value="traditional">手繪 Traditional</option>
+          <option value="digital">電繪 Digital</option>
+        </select>
+        <label class="sr-only" for="category-filter">繪畫技法</label><select id="category-filter">
+          <option value="all">全部技法</option>
+        </select>
+        <label class="sr-only" for="year-filter">創作年份</label><select id="year-filter">
+          <option value="all">全部年份</option>
+        </select>
+        <label class="sr-only" for="sort-filter">排序方式</label><select id="sort-filter">
+          <option value="original">原始順序</option>
+          <option value="newest">年份：新到舊</option>
+          <option value="oldest">年份：舊到新</option>
+        </select>
+      </div>
+      <p id="artwork-count" class="artwork-count" aria-live="polite">載入中⋯</p>
+    </section>
+    <section id="gallery-grid" class="artwork-grid gallery-grid" aria-live="polite">
+      <p class="loading-message">正在載入作品⋯</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div><a class="brand" href="index.html">✿ little art journal</a>
+      <p>Thank you for stopping by.</p>
+    </div><small>© <span data-current-year></span> Personal Art Gallery.</small>
+  </footer>
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="作品圖片檢視器" hidden>
+    <button class="lightbox-close" data-lightbox-close aria-label="關閉">×</button><button class="lightbox-nav prev"
+      data-lightbox-prev aria-label="上一張">‹</button>
+    <div class="lightbox-content"><img id="lightbox-image" alt="">
+      <p id="lightbox-caption"></p>
+      <div class="lightbox-controls"><button data-zoom-out aria-label="縮小">－</button><button data-zoom-in
+          aria-label="放大">＋</button><button data-fullscreen>全螢幕</button></div>
+    </div>
+    <button class="lightbox-nav next" data-lightbox-next aria-label="下一張">›</button>
+  </div>
+</body>
+
+</html>

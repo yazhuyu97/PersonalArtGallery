@@ -1,0 +1,21 @@
+:root {
+  --color-background: #F8F5EF;
+  --color-surface: #FFFDF9;
+  --color-pink: #F6DDE3;
+  --color-pink-light: #FBECEF;
+  --color-green: #DCE9D9;
+  --color-green-dark: #A8B99F;
+  --color-beige: #EBDCCB;
+  --color-text: #514944;
+  --color-text-muted: #8B8178;
+  --color-border: #E8E1D8;
+  --color-white: #FFFFFF;
+  --color-shadow: rgba(81, 73, 68, .08);
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-serif: "Noto Serif TC", "Songti TC", serif;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --shadow-soft: 0 12px 35px var(--color-shadow);
+  --content-width: 1120px;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork｜Personal Art Gallery</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/artwork.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/artwork.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">✿</span> little art
+            journal</a><button class="menu-toggle" aria-label="開啟導覽選單" aria-expanded="false">☰</button>
+        <nav class="site-nav"><a href="index.html">Home</a><a class="active" href="gallery.html">Gallery</a><a
+                href="about.html">About Me</a><a href="index.html#contact">Contact</a></nav>
+    </header>
+    <main class="section-wrap page-main"><a class="text-link back-link" href="gallery.html">← 返回 Gallery</a>
+        <div id="artwork-detail">
+            <p class="loading-message">正在載入作品⋯</p>
+        </div>
+        <nav id="artwork-pagination" class="artwork-pagination" aria-label="切換作品"></nav>
+    </main>
+    <footer class="site-footer">
+        <div><a class="brand" href="index.html">✿ little art journal</a></div><small>© <span data-current-year></span>
+            Personal Art Gallery.</small>
+    </footer>
+</body>
+
+</html>
